@@ -1,6 +1,10 @@
 public class HashTable{
 	
-	ListNode[] ary = new ListNode[100];
+	ListNode[] table;
+	
+	HashTable(){
+		table = new ListNode[100];
+	}
 
 	private static class ListNode{
 		
@@ -8,10 +12,10 @@ public class HashTable{
 		String key;
 		int val;
 		
-		ListNode(String key, int val, ListNode next){//constructor
+		ListNode(String key, int val){//constructor
 			this.key = key;
 			this.val = val;
-			this.next = next;
+			next = null;
 		}
 		
 	}
@@ -20,12 +24,12 @@ public class HashTable{
 		int hashCode;
 		hashCode = Math.abs(key.hashCode() % 100);
 		
-		if(ary[hashCode].key == key){
-			return ary[hashCode];
+		if(table[hashCode].key.equals(key)){
+			return table[hashCode];
 		}
 		else{
-			ListNode runner = ary[hashCode].next;
-			while(runner.key != key){
+			ListNode runner = table[hashCode];
+			while(runner.next != null && !runner.key.equals(key)){
 				runner = runner.next;
 			}
 			return runner;
@@ -36,15 +40,15 @@ public class HashTable{
 	public void put(String key, int value){
 		int hashCode;
 		hashCode = Math.abs(key.hashCode() % 100);
-		if(ary[hashCode] == null){
-			ary[hashCode] = new ListNode(key, value, null);
+		if(table[hashCode] == null){
+			table[hashCode] = new ListNode(key, value);
 		}
 		else{
-			ListNode runner = ary[hashCode].next;
-			while(runner != null){
+			ListNode runner = table[hashCode];
+			while(runner.next != null){
 				runner = runner.next;
 			}
-			runner = new ListNode(key, value, null);
+			runner.next = new ListNode(key, value);
 		}
 	}
 	
@@ -52,15 +56,17 @@ public class HashTable{
 		int hashCode;
 		hashCode = Math.abs(key.hashCode() % 100);
 		
-		if(ary[hashCode].key == key){
-			ary[hashCode] = null;
+		if(table[hashCode].key == key){
+			table[hashCode] = table[hashCode].next;
 		}
 		else{
-			ListNode runner = ary[hashCode];
-			while(ary[hashCode].next.key != key){
-				runner = runner.next;
+			ListNode prev = table[hashCode];
+			ListNode curr = table[hashCode].next;
+			while(curr != null && !curr.key.equals(key)){
+				prev = curr;
+				curr = curr.next;
 			}
-			runner.next = null;
+			prev.next = curr.next;
 		}
 	}
 	
@@ -74,7 +80,7 @@ public class HashTable{
 	
 	public int size(){
 		int counter = 0;
-		for(ListNode node:ary){
+		for(ListNode node:table){
 			if(node != null){
 				ListNode runner = node;
 				counter++;
@@ -90,25 +96,26 @@ public class HashTable{
 	
 	public static void main(String[] args){
 		
-		StringBuilder key;
+		HashTable hashTable = new HashTable();
+		StringBuilder keyBuilder;
+		String key;
 		int val;
 		String[] randList = new String[5];
-		int k;//determines index of randList
 		
 		for(int i = 0; i < 50; i ++){
-			key = new StringBuilder();
+			keyBuilder = new StringBuilder();
 			for(int j = 0; j < 7; j++){
-				key.append((char)((int)(Math.random() * 26) + 'a'));
-				val = (int)(Math.random() * 10000);
-				ary.put(key.toString(), val);
+				keyBuilder.append((char)((int)(Math.random() * 26) + 'a'));
 			}
-			if(i % 10 == 0){
-				k = i/10;
-				randList[k] = get(key);
-			}
+			
+			val = (int)(Math.random() * 10000);
+			key = keyBuilder.toString();
+			hashTable.put(key, val);
+			System.out.println(hashTable.get(key).key + "   " + hashTable.get(key).val);
+			
 		}
 		
-		System.out.println(size());
+		System.out.println(hashTable.size());
 		
 	}
 	
