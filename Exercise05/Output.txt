@@ -1,0 +1,56 @@
+Laughter 1 
+ability 8 
+and 5 7 
+apathy 2 
+appraise 8 
+aside 3 
+assumes 5 
+bother 3 
+chief 4 
+constitutes 4 
+context 5 
+couched 6 
+deceit 3 
+delusion 2 3 
+despondency 2 
+doctrinairism 5 
+enables 1 
+external 7 
+face 1 
+falling 2 
+folly 7 
+form 5 
+from 7 
+have 2 
+humour 6 
+immunity 7 
+indicator 7 
+into 2 3 
+jargon 6 
+leaving 3 
+likelihood 7 
+mechanism 1 
+mental 1 
+most 6 
+mystifying 6 
+obstacle 4 
+our 4 
+people 2 
+print 3 
+progress 4 
+realistically 8 
+reality 1 
+reliable 6 
+rushing 3 
+seldom 3 
+sense 6 
+situations 8 
+social 8 
+society 5 
+sunk 2 
+this 5 7 
+understanding 4 
+usually 5 
+which 1 
+who 2 
+without 1 
